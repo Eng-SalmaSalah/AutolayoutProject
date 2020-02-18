@@ -56,18 +56,36 @@ class ViewController: UIViewController {
         view.addSubview(label4)
         view.addSubview(label5)
         view.addSubview(label6)
+        
+        //setConstraintsUsingAnchor
+        var previousLabel:UILabel?
+        for label in [label1,label2,label3,label4,label5,label6]{
+            label.widthAnchor.constraint(equalTo: view.widthAnchor).isActive = true
+            label.heightAnchor.constraint(equalToConstant: 72).isActive = true
+            if let previous = previousLabel {
+                label.topAnchor.constraint(equalTo: previous.bottomAnchor, constant: 10).isActive = true
+            }else{
+                label.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 0).isActive = true
+            }
+            previousLabel = label
+        }
+        
+        //safeAreaLayoutGuide : el area ele yzhr feha l content ll user b3edn 3n l notch msln f 7alt iphone x
+        
+        
+        
         // we must add the subviews before applying the constraints
         
-        let viewsDictionary = ["label1" : label1 ,"label2" : label2 , "label3" : label3 , "label4" : label4 ,"label5" : label5 , "label6" : label6]
-        let metrics = ["labelHeight" : 72]
-        for label in viewsDictionary.keys{
-            view.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|[\(label)]|", options: [], metrics: nil, views: viewsDictionary))
-            /*
-             The H: parts means that we're defining a horizontal layout; we'll do a vertical layout soon. The pipe symbol, |, means "the edge of the view." We're adding these constraints to the main view inside our view controller, so this effectively means "the edge of the view controller." Finally, we have [label1], which is a visual way of saying "put label1 here". Imagine the brackets, [ and ], are the edges of the view.
-             */
-
-        }
-                    view.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|-[label1(labelHeight@999)]-[label2(label1)]-[label3(label1)]-[label4(label1)]-[label5(label1)]-[label6(label1)]-(>=10)-|", options: [], metrics: metrics, views: viewsDictionary))
+//        let viewsDictionary = ["label1" : label1 ,"label2" : label2 , "label3" : label3 , "label4" : label4 ,"label5" : label5 , "label6" : label6]
+//        let metrics = ["labelHeight" : 72]
+//        for label in viewsDictionary.keys{
+//            view.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|[\(label)]|", options: [], metrics: nil, views: viewsDictionary))
+//            /*
+//             The H: parts means that we're defining a horizontal layout; we'll do a vertical layout soon. The pipe symbol, |, means "the edge of the view." We're adding these constraints to the main view inside our view controller, so this effectively means "the edge of the view controller." Finally, we have [label1], which is a visual way of saying "put label1 here". Imagine the brackets, [ and ], are the edges of the view.
+//             */
+//
+//        }
+//                    view.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|-[label1(labelHeight@999)]-[label2(label1)]-[label3(label1)]-[label4(label1)]-[label5(label1)]-[label6(label1)]-(>=10)-|", options: [], metrics: metrics, views: viewsDictionary))
         /*
          This time we're specifying V:, meaning that these constraints are vertical. And we have multiple views inside the VFL, so lots of constraints will be generated.
          the - symbol, which means "space". It's 10 points by default, but you can customize it.
