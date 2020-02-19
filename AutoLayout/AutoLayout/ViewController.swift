@@ -59,9 +59,17 @@ class ViewController: UIViewController {
         
         //setConstraintsUsingAnchor
         var previousLabel:UILabel?
+        
+       
+        
+        
         for label in [label1,label2,label3,label4,label5,label6]{
-            label.widthAnchor.constraint(equalTo: view.widthAnchor).isActive = true
-            label.heightAnchor.constraint(equalToConstant: 72).isActive = true
+//            label.widthAnchor.constraint(equalTo: view.widthAnchor).isActive = true
+//            label.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 0).isActive = true
+//            label.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: 0).isActive = true
+            label.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 0).isActive = true
+            label.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: 0).isActive = true
+            label.heightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.heightAnchor, multiplier: 1/6, constant: -10).isActive = true
             if let previous = previousLabel {
                 label.topAnchor.constraint(equalTo: previous.bottomAnchor, constant: 10).isActive = true
             }else{
@@ -75,6 +83,8 @@ class ViewController: UIViewController {
         
         
         // we must add the subviews before applying the constraints
+        
+        //add constraints using VFL : visual format language
         
 //        let viewsDictionary = ["label1" : label1 ,"label2" : label2 , "label3" : label3 , "label4" : label4 ,"label5" : label5 , "label6" : label6]
 //        let metrics = ["labelHeight" : 72]
